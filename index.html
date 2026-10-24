@@ -1,21 +1,356 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Richetti</title>
+  <title>TEST2037 · Servicios tecnológicos</title>
+  <meta name="description" content="TEST2037 es una empresa de servicios tecnológicos: desarrollo de software, cloud, datos e IA, ciberseguridad y soporte IT para empresas.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
   <style>
-    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.6; color: #222; }
-    a { color: #0366d6; }
+    :root {
+      --ink: #0a0a0a;
+      --paper: #fafaf7;
+      --muted: #5b5b57;
+      --line: #e4e4de;
+      --card: #ffffff;
+      --accent: #c8f04a;
+      --accent-ink: #0a0a0a;
+      --radius: 18px;
+      --max: 1160px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: Inter, system-ui, -apple-system, sans-serif; background: var(--paper); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    .mono { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
+
+    /* Nav */
+    header { position: sticky; top: 0; z-index: 10; background: rgba(250,250,247,.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; letter-spacing: -.02em; font-size: 1.15rem; }
+    .brand img { height: 44px; width: auto; }
+    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+    .nav-links a { text-decoration: none; font-weight: 500; font-size: .95rem; color: var(--muted); transition: color .2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 999px; font-weight: 600; font-size: .95rem; text-decoration: none; border: 1.5px solid var(--ink); transition: transform .15s, background .2s, color .2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--ink); color: var(--paper) !important; }
+    .btn-accent { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+    .btn-ghost { background: transparent; }
+    .btn-ghost:hover { background: var(--ink); color: var(--paper); }
+
+    /* Hero */
+    .hero { padding: 96px 0 80px; position: relative; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(var(--line) 1px, transparent 1px); background-size: 24px 24px; mask-image: linear-gradient(to bottom, #000 40%, transparent); -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent); z-index: -1; }
+    .hero-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 56px; align-items: center; }
+    .pill { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px 6px 6px; border: 1px solid var(--line); background: var(--card); border-radius: 999px; font-size: .85rem; color: var(--muted); margin-bottom: 28px; }
+    .pill span { background: var(--accent); color: var(--accent-ink); padding: 3px 10px; border-radius: 999px; font-weight: 600; font-size: .75rem; }
+    h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); line-height: 1.02; letter-spacing: -.045em; font-weight: 800; }
+    h1 em { font-style: normal; background: linear-gradient(transparent 62%, var(--accent) 62%, var(--accent) 92%, transparent 92%); }
+    .lead { font-size: 1.2rem; color: var(--muted); max-width: 560px; margin: 24px 0 36px; }
+    .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-logo { background: var(--card); border: 1px solid var(--line); border-radius: 28px; padding: 40px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.18); position: relative; }
+    .hero-logo::after { content: "est. 2037 · lab"; position: absolute; top: 18px; right: 22px; font-family: "JetBrains Mono", monospace; font-size: .72rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+
+    /* Logos strip / stats */
+    .stats { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--card); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat { padding: 36px 24px; border-right: 1px solid var(--line); }
+    .stat:last-child { border-right: none; }
+    .stat b { display: block; font-size: 2.4rem; font-weight: 800; letter-spacing: -.04em; line-height: 1.1; }
+    .stat small { color: var(--muted); font-size: .92rem; }
+
+    /* Sections */
+    section { padding: 110px 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 56px; flex-wrap: wrap; }
+    .section-head h2 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.035em; line-height: 1.08; font-weight: 800; max-width: 640px; margin-top: 12px; }
+    .section-head p { color: var(--muted); max-width: 400px; }
+
+    .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; transition: transform .2s, box-shadow .2s, border-color .2s; position: relative; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 24px 48px -28px rgba(0,0,0,.25); border-color: var(--ink); }
+    .card .num { position: absolute; top: 28px; right: 28px; color: #b5b5ae; }
+    .icon { width: 52px; height: 52px; border-radius: 14px; background: var(--ink); color: var(--accent); display: grid; place-items: center; margin-bottom: 24px; }
+    .icon svg { width: 26px; height: 26px; }
+    .card h3 { font-size: 1.25rem; letter-spacing: -.02em; margin-bottom: 10px; }
+    .card p { color: var(--muted); font-size: .97rem; }
+    .card ul { list-style: none; margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .card li { font-size: .78rem; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
+
+    /* Dark band: method */
+    .dark { background: var(--ink); color: var(--paper); }
+    .dark .section-head p, .dark .step p { color: #a3a39c; }
+    .dark .mono { color: var(--accent); }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid #2a2a28; }
+    .step { padding: 36px 28px 8px 0; border-right: 1px solid #2a2a28; padding-left: 28px; }
+    .step:first-child { padding-left: 0; }
+    .step:last-child { border-right: none; }
+    .step .mono { display: block; margin-bottom: 18px; }
+    .step h3 { font-size: 1.35rem; letter-spacing: -.02em; margin-bottom: 10px; }
+
+    /* Sectors */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .split h2 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.035em; line-height: 1.08; font-weight: 800; margin: 12px 0 20px; }
+    .split > div > p { color: var(--muted); margin-bottom: 16px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 12px; }
+    .tags span { padding: 14px 20px; border: 1px solid var(--line); background: var(--card); border-radius: 14px; font-weight: 600; transition: background .2s, color .2s; }
+    .tags span:hover { background: var(--accent); border-color: var(--accent); }
+    .checks { list-style: none; margin-top: 28px; display: grid; gap: 14px; }
+    .checks li { display: flex; gap: 12px; align-items: flex-start; }
+    .checks li::before { content: "✓"; flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; font-size: .8rem; font-weight: 800; margin-top: 1px; }
+
+    /* CTA */
+    .cta { padding: 0 0 110px; }
+    .cta-box { background: var(--accent); border-radius: 32px; padding: 72px 56px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center; position: relative; overflow: hidden; }
+    .cta-box h2 { font-size: clamp(2rem, 4.5vw, 3.4rem); letter-spacing: -.04em; line-height: 1.02; font-weight: 800; }
+    .cta-box p { margin: 18px 0 0; font-size: 1.1rem; max-width: 520px; }
+    .contact-card { background: var(--ink); color: var(--paper); border-radius: 22px; padding: 32px; }
+    .contact-card .mono { color: var(--accent); }
+    .contact-card a.mail { display: block; font-size: 1.35rem; font-weight: 700; margin: 10px 0 22px; text-decoration: none; word-break: break-all; }
+    .contact-card .btn { border-color: var(--accent); }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--line); padding: 56px 0 40px; background: var(--card); }
+    .foot { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
+    .foot img { height: 64px; width: auto; margin-bottom: 16px; }
+    .foot p { color: var(--muted); font-size: .92rem; max-width: 340px; }
+    .foot h4 { font-size: .8rem; margin-bottom: 14px; color: var(--muted); }
+    .foot ul { list-style: none; display: grid; gap: 8px; }
+    .foot ul a { text-decoration: none; font-weight: 500; }
+    .foot ul a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .copy { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; color: var(--muted); font-size: .85rem; flex-wrap: wrap; gap: 12px; }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero-grid, .split, .cta-box { grid-template-columns: 1fr; }
+      .hero-logo { max-width: 460px; }
+      .services { grid-template-columns: 1fr 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .step { padding-left: 0 !important; border-right: none; border-bottom: 1px solid #2a2a28; padding-bottom: 28px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .stat:nth-child(2) { border-right: none; }
+      .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .foot { grid-template-columns: 1fr 1fr; }
+      .foot > div:first-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 640px) {
+      .wrap { padding: 0 16px; }
+      .nav-links li:not(:last-child) { display: none; }
+      .hero { padding: 64px 0 56px; }
+      section { padding: 80px 0; }
+      .services, .steps { grid-template-columns: 1fr; }
+      .cta-box { padding: 44px 24px; border-radius: 24px; }
+      .stat { padding: 24px 16px; }
+      .stat b { font-size: 1.9rem; }
+    }
   </style>
 </head>
 <body>
-  <h1>Hi, I'm Richetti</h1>
-  <p>Welcome to my GitHub Pages site.</p>
-  <h2>Legal</h2>
-  <ul>
-    <li><a href="privacy.html">Application privacy policy</a></li>
-    <li><a href="terms.html">Application terms of service</a></li>
-  </ul>
+
+  <header>
+    <nav class="wrap">
+      <a class="brand" href="./" aria-label="TEST2037 inicio">
+        <img src="logo.png" alt="TEST2037">
+      </a>
+      <ul class="nav-links">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#metodo">Método</a></li>
+        <li><a href="#sectores">Sectores</a></li>
+        <li><a class="btn btn-primary" href="#contacto">Hablemos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <div class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="pill"><span>Nuevo</span> Servicios de IA aplicada para empresas</div>
+          <h1>Tecnología que <em>funciona</em>, hoy y en 2037.</h1>
+          <p class="lead">Somos un laboratorio de servicios tecnológicos. Diseñamos, construimos y mantenemos el software, la infraestructura y los datos que hacen crecer a tu empresa.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#contacto">Cuéntanos tu proyecto →</a>
+            <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
+          </div>
+        </div>
+        <div class="hero-logo reveal">
+          <img src="logo.png" alt="Logotipo de TEST2037: un matraz de laboratorio con la etiqueta 2037">
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="wrap stats-grid">
+        <div class="stat"><b>360°</b><small>Servicio integral, de la idea al soporte</small></div>
+        <div class="stat"><b>24/7</b><small>Monitorización y soporte técnico</small></div>
+        <div class="stat"><b>6</b><small>Áreas de especialización</small></div>
+        <div class="stat"><b>1</b><small>Único interlocutor para todo</small></div>
+      </div>
+    </div>
+
+    <!-- Services -->
+    <section id="servicios">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="mono">// Servicios</span>
+            <h2>Todo lo que tu empresa necesita en tecnología, bajo un mismo techo.</h2>
+          </div>
+          <p>Somos generalistas por diseño: combinamos disciplinas para resolver problemas reales, sin depender de cinco proveedores distintos.</p>
+        </div>
+
+        <div class="services">
+          <article class="card reveal">
+            <span class="num mono">01</span>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></div>
+            <h3>Desarrollo de software</h3>
+            <p>Aplicaciones web y móviles, APIs e integraciones a medida, construidas con prácticas modernas y código mantenible.</p>
+            <ul><li>Web</li><li>Móvil</li><li>APIs</li></ul>
+          </article>
+          <article class="card reveal">
+            <span class="num mono">02</span>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg></div>
+            <h3>Cloud e infraestructura</h3>
+            <p>Migración, arquitectura y operación en la nube. Infraestructura como código, DevOps y costes bajo control.</p>
+            <ul><li>AWS · Azure · GCP</li><li>DevOps</li><li>Kubernetes</li></ul>
+          </article>
+          <article class="card reveal">
+            <span class="num mono">03</span>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg></div>
+            <h3>Datos e inteligencia artificial</h3>
+            <p>Plataformas de datos, analítica y cuadros de mando, y soluciones de IA aplicadas a procesos concretos de negocio.</p>
+            <ul><li>BI</li><li>Data engineering</li><li>IA generativa</li></ul>
+          </article>
+          <article class="card reveal">
+            <span class="num mono">04</span>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>
+            <h3>Ciberseguridad</h3>
+            <p>Auditorías, hardening, gestión de identidades y planes de continuidad para proteger lo que más importa.</p>
+            <ul><li>Auditoría</li><li>IAM</li><li>Backup</li></ul>
+          </article>
+          <article class="card reveal">
+            <span class="num mono">05</span>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5a9 9 0 0 1 18 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg></div>
+            <h3>Soporte y sistemas IT</h3>
+            <p>Gestión de equipos, redes y puestos de trabajo, con soporte técnico ágil y monitorización proactiva.</p>
+            <ul><li>Helpdesk</li><li>Redes</li><li>Microsoft 365</li></ul>
+          </article>
+          <article class="card reveal">
+            <span class="num mono">06</span>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></div>
+            <h3>Consultoría y transformación digital</h3>
+            <p>Estrategia tecnológica, selección de herramientas y automatización de procesos para trabajar mejor.</p>
+            <ul><li>Estrategia</li><li>Automatización</li><li>Formación</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Method -->
+    <section id="metodo" class="dark">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="mono">// Método</span>
+            <h2>Un proceso de laboratorio: hipótesis, prueba y resultado.</h2>
+          </div>
+          <p>Trabajamos en ciclos cortos y medibles para que veas avances desde la primera semana.</p>
+        </div>
+        <div class="steps">
+          <div class="step reveal"><span class="mono">Fase 01</span><h3>Diagnóstico</h3><p>Entendemos tu negocio, tus sistemas actuales y el objetivo que quieres alcanzar.</p></div>
+          <div class="step reveal"><span class="mono">Fase 02</span><h3>Diseño</h3><p>Proponemos la solución, el plan y el presupuesto, con prioridades claras.</p></div>
+          <div class="step reveal"><span class="mono">Fase 03</span><h3>Construcción</h3><p>Desarrollamos e implantamos en iteraciones, con entregas frecuentes y visibles.</p></div>
+          <div class="step reveal"><span class="mono">Fase 04</span><h3>Evolución</h3><p>Mantenemos, medimos y mejoramos continuamente lo que hemos construido.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sectors -->
+    <section id="sectores">
+      <div class="wrap split">
+        <div>
+          <span class="mono">// Para quién</span>
+          <h2>Generalistas en tecnología, especialistas en tu problema.</h2>
+          <p>Acompañamos a startups, pymes y grandes organizaciones de cualquier sector. Nuestra fuerza está en conectar piezas: el software con los datos, los datos con las personas y todo ello con una infraestructura segura.</p>
+          <ul class="checks">
+            <li>Un equipo multidisciplinar y un único punto de contacto.</li>
+            <li>Tecnología abierta y sin dependencias innecesarias.</li>
+            <li>Transparencia total en plazos, costes y decisiones.</li>
+            <li>Seguridad y privacidad desde el diseño.</li>
+          </ul>
+        </div>
+        <div class="tags reveal">
+          <span>Industria</span><span>Retail y e‑commerce</span><span>Salud</span><span>Educación</span><span>Logística</span><span>Finanzas</span><span>Turismo</span><span>Sector público</span><span>Energía</span><span>Startups</span><span>Servicios profesionales</span><span>Medios</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA / Contact -->
+    <div class="cta" id="contacto">
+      <div class="wrap">
+        <div class="cta-box reveal">
+          <div>
+            <h2>¿Tienes un reto tecnológico? Hagamos el experimento juntos.</h2>
+            <p>Cuéntanos qué necesitas y te responderemos con una propuesta clara y sin compromiso.</p>
+          </div>
+          <div class="contact-card">
+            <span class="mono">Escríbenos</span>
+            <a class="mail" href="mailto:hola@test2037.com">hola@test2037.com</a>
+            <a class="btn btn-accent" href="mailto:hola@test2037.com?subject=Nuevo%20proyecto">Empezar un proyecto →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <img src="logo.png" alt="TEST2037">
+          <p>Empresa de servicios tecnológicos: software, cloud, datos, IA, ciberseguridad y soporte IT.</p>
+        </div>
+        <div>
+          <h4 class="mono">Empresa</h4>
+          <ul>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#metodo">Método</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="mono">Legal</h4>
+          <ul>
+            <li><a href="privacy.html">Application privacy policy</a></li>
+            <li><a href="terms.html">Application terms of service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copy">
+        <span>© <span id="y">2026</span> TEST2037. Todos los derechos reservados.</span>
+        <span class="mono">Built for 2037</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
